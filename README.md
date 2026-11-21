@@ -4,6 +4,8 @@ A screen test judged by AI. You get a boring line and an emotion, act it out lou
 
 Five scenes per game. Audio never leaves the page: the model is downloaded once and runs locally.
 
+Live demo: https://act-it-out.vercel.app
+
 ## How it works
 
 1. The microphone is recorded with `MediaRecorder` for up to 5 seconds, with the browser's echo cancellation, noise suppression and auto gain turned off so the model hears the voice as it is. A clip can be uploaded instead.
