@@ -1,7 +1,14 @@
 import { pipeline } from '@huggingface/transformers';
 
-import { MODEL_DTYPE, MODEL_ID } from '@/constants/emotions';
-import { toEmotionScores } from '@/lib/game/score';
+import {
+  ANALYSIS_HOP_SECONDS,
+  ANALYSIS_WINDOW_SECONDS,
+  MODEL_DTYPE,
+  MODEL_ID,
+} from '@/constants/emotions';
+import { splitWindows } from '@/lib/audio/windows';
+import { averageScores, toEmotionScores } from '@/lib/game/score';
+import type { TEmotionScores } from '@/types/emotion';
 import type { TWorkerRequest, TWorkerResponse } from '@/types/worker';
 
 import type { ProgressInfo } from '@huggingface/transformers';
@@ -42,8 +49,15 @@ self.addEventListener('message', async (event: MessageEvent<TWorkerRequest>) => 
       post({ type: 'ready' });
       return;
     }
-    const output = await classify(request.audio, { top_k: 8 });
-    post({ type: 'result', id: request.id, scores: toEmotionScores(output) });
+    const segments = [
+      request.audio,
+      ...splitWindows(request.audio, ANALYSIS_WINDOW_SECONDS, ANALYSIS_HOP_SECONDS),
+    ];
+    const results: TEmotionScores[] = [];
+    for (const segment of segments) {
+      results.push(toEmotionScores(await classify(segment, { top_k: 8 })));
+    }
+    post({ type: 'result', id: request.id, scores: averageScores(results) });
   } catch (error) {
     classifier = null;
     post({

@@ -6,10 +6,10 @@ Five scenes per game. Audio never leaves the page: the model is downloaded once 
 
 ## How it works
 
-1. The microphone is recorded with `MediaRecorder` for up to 5 seconds. A clip can be uploaded instead.
+1. The microphone is recorded with `MediaRecorder` for up to 5 seconds, with the browser's echo cancellation, noise suppression and auto gain turned off so the model hears the voice as it is. A clip can be uploaded instead.
 2. The take is decoded, mixed down to mono, resampled to 16 kHz with `OfflineAudioContext` and trimmed to speech by frame energy.
-3. A Web Worker runs [Speech-Emotion-Classification](https://huggingface.co/prithivMLmods/Speech-Emotion-Classification), a wav2vec2 classifier, through Transformers.js (ONNX Runtime Web on WASM, 8-bit weights, 95 MB, cached by the browser).
-4. The model returns probabilities for eight emotions. The score is the probability of the requested one. A calm card also counts neutral, because the model splits calm speech between the two labels.
+3. A Web Worker runs [Speech-Emotion-Classification](https://huggingface.co/prithivMLmods/Speech-Emotion-Classification), a wav2vec2 classifier, through Transformers.js (ONNX Runtime Web on WASM, 8-bit weights, 95 MB, cached by the browser). It classifies the whole take and every 1.5-second window with a 0.5-second step, then averages the probabilities.
+4. A take is believed when the requested emotion beats every other one. A calm card also counts neutral, because the model splits calm speech between the two labels. Believed takes score 70 to 100 depending on how clear the win is; the rest score below 70 depending on how close the requested emotion came.
 5. Loudness and pitch shown during recording come from the Web Audio analyser, without the model.
 
 The model was trained on acted speech, so it rewards clear, exaggerated delivery. It judges acting, not mood.
@@ -68,7 +68,17 @@ scripts/
 
 ## Choosing the model
 
-`scripts/eval-models.mjs` runs three browser-ready ONNX models on a folder of labelled clips named like CREMA-D (`1001_DFA_ANG_XX.wav`, 16 kHz mono PCM). On 24 CREMA-D clips (4 actors, 6 emotions) two models got 20 of 24 right at about 0.1 s per clip, and the third failed to load because its repository is missing a file. The app uses the model that also covers calm and surprise. The clips are not part of this repository.
+`scripts/eval-models.mjs` runs three browser-ready ONNX models on a folder of labelled clips named like CREMA-D (`1001_DFA_ANG_XX.wav`, 16 kHz mono PCM) and reports top-1 accuracy for the whole clip and for the whole clip averaged with 1.5-second windows.
+
+Results on 156 CREMA-D clips (12 actors, 6 emotions):
+
+| Model                                                          | Whole clip                                           | With windows |
+| -------------------------------------------------------------- | ---------------------------------------------------- | ------------ |
+| `onnx-community/Speech-Emotion-Classification-ONNX` (used)     | 60%                                                  | 65%          |
+| `onnx-community/wav2vec2-base-Speech_Emotion_Recognition-ONNX` | 62%                                                  | 57%          |
+| `onnx-community/wav2vec2-emotion-recognition-ONNX`             | fails to load: no `tokenizer.json` in the repository |              |
+
+The used model also covers calm and surprise, which the game needs. Running the same clips through a simulated laptop microphone (band limit, room echo, noise, Opus at 32 kbps) changed its accuracy by no more than 2 points, so the limit is the model, not the microphone. Its most common mistakes are angry heard as happy, and fear or neutral heard as sad. The clips are not part of this repository.
 
 ## Credits
 

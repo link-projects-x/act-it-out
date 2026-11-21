@@ -4,6 +4,8 @@ export const MODEL_ID = 'onnx-community/Speech-Emotion-Classification-ONNX';
 export const MODEL_DTYPE = 'q8';
 export const MODEL_SIZE_MB = 95;
 export const MODEL_CARD_URL = 'https://huggingface.co/prithivMLmods/Speech-Emotion-Classification';
+export const ANALYSIS_WINDOW_SECONDS = 1.5;
+export const ANALYSIS_HOP_SECONDS = 0.5;
 
 export const MODEL_LABELS: Record<string, TEmotion> = {
   ANG: 'angry',
