@@ -1,0 +1,53 @@
+@use './breakpoints' as bp;
+
+@mixin display($size: 104px, $mobile: 52px) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: $size;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+
+  @include bp.mobile {
+    font-size: $mobile;
+  }
+}
+
+@mixin script {
+  font-family: var(--font-script);
+}
+
+@mixin label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@mixin body-lg {
+  font-family: var(--font-sans);
+  font-size: 19px;
+  line-height: 1.55;
+
+  @include bp.mobile {
+    font-size: 16px;
+  }
+}
+
+@mixin body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@mixin caption {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+@mixin number {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}

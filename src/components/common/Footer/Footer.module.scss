@@ -1,0 +1,26 @@
+@use '@/styles/typography' as type;
+
+.footer {
+  @include type.caption;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-2);
+  color: var(--text-muted);
+
+  span:last-child {
+    max-width: 640px;
+  }
+
+  a {
+    color: var(--text-secondary);
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+}

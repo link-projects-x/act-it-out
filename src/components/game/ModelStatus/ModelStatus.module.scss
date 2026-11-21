@@ -1,0 +1,75 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.chip {
+  @include type.caption;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+
+  @include bp.mobile {
+    display: none;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+
+.loading {
+  @include type.caption;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  color: var(--text-secondary);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.percent {
+  @include type.number;
+
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.track {
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--track);
+}
+
+.fill {
+  height: 100%;
+  background: var(--marquee);
+  transform: scaleX(var(--progress));
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.error {
+  @include type.body;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--tally-soft);
+  color: var(--coral);
+}

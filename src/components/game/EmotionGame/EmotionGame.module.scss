@@ -1,0 +1,87 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: calc(var(--page-width) + var(--page-padding) * 2);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 32px var(--page-padding) 40px;
+
+  @include bp.tablet {
+    --page-padding: 28px;
+  }
+
+  @include bp.mobile {
+    --page-padding: 18px;
+
+    gap: 24px;
+    padding-top: 22px;
+  }
+}
+
+.main {
+  flex: 1;
+}
+
+.take,
+.verdict {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  margin: 0 auto;
+
+  @include bp.mobile {
+    gap: 18px;
+  }
+}
+
+.take {
+  max-width: 820px;
+  align-items: center;
+}
+
+.verdict {
+  max-width: var(--content-width);
+}
+
+.notice {
+  @include type.body;
+
+  max-width: 480px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--tally-soft);
+  color: var(--coral);
+  text-align: center;
+}
+
+.upload {
+  @include type.caption;
+
+  margin-top: -14px;
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    color: var(--text-secondary);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.fileInput {
+  display: none;
+}

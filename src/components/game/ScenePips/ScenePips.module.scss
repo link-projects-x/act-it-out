@@ -1,0 +1,60 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  @include bp.mobile {
+    gap: 10px;
+  }
+}
+
+.label {
+  @include type.label;
+
+  color: var(--text-secondary);
+}
+
+.short {
+  display: none;
+}
+
+@include bp.mobile {
+  .long {
+    display: none;
+  }
+
+  .short {
+    display: inline;
+  }
+}
+
+.pips {
+  display: flex;
+  gap: 6px;
+
+  @include bp.mobile {
+    gap: 4px;
+  }
+}
+
+.pip {
+  width: 22px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--line-3);
+
+  @include bp.mobile {
+    width: 14px;
+  }
+}
+
+.done {
+  background: var(--marquee);
+}
+
+.current {
+  background: var(--text-primary);
+}

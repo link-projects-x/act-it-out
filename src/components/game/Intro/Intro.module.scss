@@ -1,0 +1,127 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+
+  @include bp.mobile {
+    gap: 40px;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 56px;
+
+  @include bp.mobile {
+    gap: 40px;
+  }
+}
+
+.copy {
+  display: flex;
+  flex: 1 1 480px;
+  flex-direction: column;
+  gap: 26px;
+  min-width: 0;
+
+  @include bp.mobile {
+    flex-basis: 100%;
+    gap: 20px;
+  }
+}
+
+.kicker {
+  @include type.label;
+
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--marquee);
+}
+
+.title {
+  @include type.display(104px, 56px);
+}
+
+.accent {
+  color: var(--marquee);
+}
+
+.lead {
+  @include type.body-lg;
+
+  max-width: 520px;
+  color: var(--text-secondary);
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 20px;
+}
+
+.meta {
+  @include type.body;
+
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.preview {
+  display: flex;
+  flex: 1 1 400px;
+  justify-content: center;
+  min-width: 0;
+  padding: 12px 0;
+
+  @include bp.mobile {
+    flex-basis: 100%;
+    padding: 0 8px;
+  }
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  flex: 1 1 260px;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+
+.stepNumber {
+  @include type.number;
+
+  font-size: 13px;
+  color: var(--marquee);
+}
+
+.stepTitle {
+  @include type.body;
+
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.stepText {
+  @include type.body;
+
+  color: var(--text-secondary);
+}

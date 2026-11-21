@@ -1,0 +1,194 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include bp.mobile {
+    gap: 24px;
+  }
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kicker,
+.label {
+  @include type.label;
+
+  letter-spacing: 0.16em;
+}
+
+.kicker {
+  font-size: 13px;
+  color: var(--marquee);
+}
+
+.label {
+  color: var(--text-muted);
+}
+
+.title {
+  @include type.display(120px, 64px);
+
+  line-height: 0.88;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.total {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--marquee);
+}
+
+.totalValue {
+  font-family: var(--font-display);
+  font-size: 168px;
+  line-height: 0.8;
+
+  @include bp.mobile {
+    font-size: 120px;
+  }
+}
+
+.totalMax {
+  @include type.number;
+
+  font-size: 20px;
+  color: var(--text-muted);
+}
+
+.rank {
+  display: flex;
+  flex: 1 1 300px;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding-bottom: 8px;
+}
+
+.rankName {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1;
+}
+
+.rankLine {
+  @include type.body;
+
+  font-size: 17px;
+  color: var(--text-secondary);
+}
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 20px;
+  padding: 16px 20px;
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+}
+
+.scene {
+  @include type.number;
+
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.line {
+  @include type.script;
+
+  flex: 1 1 260px;
+  min-width: 0;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.tag {
+  @include type.body;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.tagLabel {
+  @include type.label;
+
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.tagIcon {
+  color: var(--emotion-color);
+}
+
+.score {
+  min-width: 48px;
+  margin-left: auto;
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1;
+  text-align: right;
+}
+
+.high {
+  color: var(--marquee);
+}
+
+.mid {
+  color: var(--text-primary);
+}
+
+.low {
+  color: var(--coral);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+
+  @include bp.mobile {
+    flex-direction: column-reverse;
+
+    button {
+      width: 100%;
+    }
+  }
+}

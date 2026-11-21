@@ -1,0 +1,43 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  color: var(--paper-ink);
+
+  @include bp.mobile {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+}
+
+.meta {
+  @include type.label;
+
+  color: var(--paper-muted);
+
+  @include bp.mobile {
+    display: none;
+  }
+}
+
+.line {
+  @include type.script;
+
+  flex: 1 1 240px;
+  font-size: 20px;
+  text-align: center;
+
+  @include bp.mobile {
+    flex: none;
+    font-size: 19px;
+  }
+}

@@ -1,0 +1,181 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.verdict {
+  --stamp-gap: var(--panel);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  padding: 36px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-xl);
+  background: var(--panel);
+
+  @include bp.mobile {
+    --stamp-gap: var(--stage);
+
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+}
+
+.stamp {
+  --stamp-color: var(--marquee);
+
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  border: 4px solid var(--stamp-color);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 8px var(--stamp-gap),
+    inset 0 0 0 10px var(--stamp-color);
+  color: var(--stamp-color);
+  transform: rotate(-8deg);
+  animation: stamp 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+
+  @include bp.mobile {
+    width: 196px;
+    height: 196px;
+  }
+}
+
+.callback {
+  --stamp-color: var(--marquee);
+}
+
+.close {
+  --stamp-color: var(--text-primary);
+}
+
+.doubt {
+  --stamp-color: var(--coral);
+}
+
+.miss {
+  --stamp-color: var(--tally);
+}
+
+.score {
+  font-family: var(--font-display);
+  font-size: 116px;
+  line-height: 0.85;
+
+  @include bp.mobile {
+    font-size: 88px;
+  }
+}
+
+.outOf {
+  @include type.label;
+
+  color: var(--text-secondary);
+  letter-spacing: 0.16em;
+
+  @include bp.mobile {
+    font-size: 10px;
+  }
+}
+
+.word {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  letter-spacing: 0.1em;
+
+  @include bp.mobile {
+    margin-top: 6px;
+    font-size: 26px;
+  }
+}
+
+.details {
+  display: flex;
+  flex: 1 1 360px;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+
+  @include bp.mobile {
+    flex: none;
+    width: 100%;
+  }
+}
+
+.heard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  @include bp.mobile {
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
+.label {
+  @include type.label;
+
+  color: var(--text-muted);
+  letter-spacing: 0.16em;
+}
+
+.heardName {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 54px;
+  line-height: 1;
+
+  @include bp.mobile {
+    gap: 10px;
+    font-size: 40px;
+  }
+}
+
+.heardIcon {
+  flex-shrink: 0;
+  color: var(--emotion-color);
+}
+
+.line {
+  @include type.body;
+
+  font-size: 17px;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+
+  @include bp.mobile {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes stamp {
+  from {
+    opacity: 0;
+    transform: rotate(-8deg) scale(1.4);
+  }
+}

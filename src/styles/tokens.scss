@@ -1,0 +1,56 @@
+:root {
+  --stage: #0e0d0c;
+  --panel: #171513;
+  --raised: #22201d;
+  --track: #2a2724;
+  --line-1: rgba(255, 255, 255, 0.06);
+  --line-2: rgba(255, 255, 255, 0.08);
+  --line-3: rgba(255, 255, 255, 0.16);
+  --line-4: rgba(255, 255, 255, 0.18);
+
+  --text-primary: #f5f0e8;
+  --text-secondary: #b9b2a6;
+  --text-muted: #8a8378;
+  --text-dim: rgba(245, 240, 232, 0.4);
+  --text-faint: rgba(245, 240, 232, 0.14);
+
+  --marquee: #ffc83d;
+  --marquee-hover: #ffd970;
+  --marquee-ink: #141210;
+  --marquee-soft: rgba(255, 200, 61, 0.12);
+  --marquee-glow: rgba(255, 200, 61, 0.6);
+
+  --tally: #ff4b3a;
+  --tally-ink: #ffffff;
+  --tally-soft: rgba(255, 75, 58, 0.16);
+  --tally-glow: rgba(255, 75, 58, 0.7);
+  --coral: #ff8a7a;
+  --ok: #9be38a;
+
+  --paper: #f2ece1;
+  --paper-ink: #141210;
+  --paper-muted: #5c564d;
+  --paper-rule: rgba(20, 18, 16, 0.28);
+
+  --emotion-angry: #ff6a55;
+  --emotion-calm: #9be38a;
+  --emotion-disgust: #c8c463;
+  --emotion-fear: #4fd8c4;
+  --emotion-happy: #ffd447;
+  --emotion-neutral: #b7b0a5;
+  --emotion-sad: #6ea8ff;
+  --emotion-surprise: #c9a2ff;
+
+  --shadow-card: 0 30px 80px rgba(0, 0, 0, 0.5);
+  --shadow-float: 0 40px 90px rgba(0, 0, 0, 0.6);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  --page-width: 1180px;
+  --content-width: 880px;
+  --page-padding: 40px;
+}

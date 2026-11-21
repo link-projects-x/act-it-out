@@ -1,0 +1,81 @@
+@use '@/styles/typography' as type;
+@use '@/styles/breakpoints' as bp;
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include bp.mobile {
+    gap: 10px;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 12px;
+
+  @include bp.mobile {
+    grid-template-columns: 112px minmax(0, 1fr) 38px;
+    gap: 10px;
+  }
+}
+
+.name {
+  @include type.body;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+
+  @include bp.mobile {
+    font-size: 14px;
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--emotion-color);
+}
+
+.track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--track);
+
+  @include bp.mobile {
+    height: 7px;
+  }
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--emotion-color);
+  transform: scaleX(var(--value));
+  transform-origin: left;
+  animation: grow 0.6s ease-out;
+}
+
+.percent {
+  @include type.number;
+
+  font-size: 14px;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}

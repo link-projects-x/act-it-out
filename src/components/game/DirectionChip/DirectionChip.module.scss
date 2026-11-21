@@ -1,0 +1,21 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--emotion-color);
+  color: var(--paper-ink);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.md {
+  padding: 7px 16px;
+  font-size: 14px;
+}
+
+.sm {
+  padding: 6px 14px;
+  font-size: 13px;
+}

@@ -1,0 +1,62 @@
+@use './tokens';
+@use './typography' as type;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include type.body;
+
+  min-height: 100vh;
+  background: var(--stage);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--marquee);
+
+  &:hover {
+    color: var(--marquee-hover);
+  }
+}
+
+::selection {
+  background: var(--marquee);
+  color: var(--marquee-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--marquee);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
