@@ -1,5 +1,36 @@
 const SILENCE_RMS = 0.01;
 
+export function voicingStrength(
+  samples: Float32Array,
+  sampleRate: number,
+  minHz = 70,
+  maxHz = 450
+): number {
+  const length = samples.length;
+  const minLag = Math.floor(sampleRate / maxHz);
+  const maxLag = Math.min(Math.floor(sampleRate / minHz), length - 2);
+  const correlations = new Float32Array(maxLag + 2);
+  for (let lag = minLag; lag <= maxLag + 1; lag += 1) {
+    let sum = 0;
+    let energyA = 0;
+    let energyB = 0;
+    for (let i = 0; i + lag < length; i += 1) {
+      sum += samples[i] * samples[i + lag];
+      energyA += samples[i] * samples[i];
+      energyB += samples[i + lag] * samples[i + lag];
+    }
+    correlations[lag] = sum / (Math.sqrt(energyA * energyB) || 1);
+  }
+
+  let best = 0;
+  for (let lag = minLag + 1; lag <= maxLag; lag += 1) {
+    const value = correlations[lag];
+    if (value > correlations[lag - 1] && value >= correlations[lag + 1] && value > best)
+      best = value;
+  }
+  return best;
+}
+
 export function rms(samples: Float32Array, start = 0, end = samples.length): number {
   let sum = 0;
   for (let i = start; i < end; i += 1) sum += samples[i] * samples[i];

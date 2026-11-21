@@ -9,7 +9,7 @@ Live demo: https://act-it-out.vercel.app
 ## How it works
 
 1. The microphone is recorded with `MediaRecorder` for up to 5 seconds, with the browser's echo cancellation, noise suppression and auto gain turned off so the model hears the voice as it is. A clip can be uploaded instead.
-2. The take is decoded, mixed down to mono, resampled to 16 kHz with `OfflineAudioContext` and trimmed to speech by frame energy.
+2. The take is decoded, mixed down to mono and resampled to 16 kHz with `OfflineAudioContext`. It only counts as speech if it has at least 0.1 s of voiced sound: frames louder than three times the take's own noise floor that also show a pitch between 70 and 450 Hz. Silence and steady background noise are rejected, and the rest is trimmed to the speech.
 3. A Web Worker runs [Speech-Emotion-Classification](https://huggingface.co/prithivMLmods/Speech-Emotion-Classification), a wav2vec2 classifier, through Transformers.js (ONNX Runtime Web on WASM, 8-bit weights, 95 MB, cached by the browser). It classifies the whole take and every 1.5-second window with a 0.5-second step, then averages the probabilities.
 4. A take is believed when the requested emotion beats every other one. A calm card also counts neutral, because the model splits calm speech between the two labels. Believed takes score 70 to 100 depending on how clear the win is; the rest score below 70 depending on how close the requested emotion came.
 5. Loudness and pitch shown during recording come from the Web Audio analyser, without the model.
@@ -44,6 +44,7 @@ Open http://localhost:4870. No environment variables are needed.
 | `npm run lint`                 | ESLint, zero warnings allowed                       |
 | `npm run lint:fix`             | ESLint with autofix                                 |
 | `npm run type-check`           | TypeScript check without emitting                   |
+| `npm test`                     | Unit tests (Vitest)                                 |
 | `npm run format`               | Prettier over the whole project                     |
 | `npm run eval:models -- <dir>` | Compares the candidate models on labelled WAV clips |
 
